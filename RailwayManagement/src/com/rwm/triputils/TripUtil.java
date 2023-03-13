@@ -251,6 +251,8 @@ public class TripUtil {
 		singletrip.put("trainid", trip.getTrainid());
 
 		singletrip.put("costperkm", trip.getCostperkm());
+		
+		singletrip.put("tripname", trip.getTripname());
 
 		JSONArray stationarray = new JSONArray();
 
