@@ -38,7 +38,7 @@ public class CorsFilter implements Filter {
 //			System.out.println("Header : " + headers.nextElement());
 //		}
 		
-		
+		System.out.println("Git Commit Check");
 		
 		fchain.doFilter(req, res);
 	}
