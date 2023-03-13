@@ -152,8 +152,6 @@
   </filter-mapping>
   <filter-mapping>
   	<filter-name>CorsFilter</filter-name>
-  	<servlet-name>TrainServlet</servlet-name>
-  	<servlet-name>TicketServlet</servlet-name>
   	<url-pattern>/train</url-pattern>
   	<url-pattern>/station</url-pattern>
   	<url-pattern>/trip</url-pattern>
@@ -168,8 +166,6 @@
   </filter-mapping>
   <filter-mapping>
   	<filter-name>AuthFilter</filter-name>
-  	<servlet-name>DummyServlet</servlet-name>
-  	<servlet-name>TicketServlet</servlet-name>
   	<url-pattern>/dummy</url-pattern>
   	<url-pattern>/train</url-pattern>
   	<url-pattern>/station</url-pattern>
