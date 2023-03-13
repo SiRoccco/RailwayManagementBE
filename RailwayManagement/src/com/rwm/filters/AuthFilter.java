@@ -44,10 +44,17 @@ public class AuthFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain fChain)
 			throws IOException, ServletException {
 		
-		
 		HttpServletRequest req = (HttpServletRequest) request;
 		
-		String requestheader = req.getHeader("X-Authorization");
+		String requestheader = req.getHeader("x-authorization");
+		
+		System.out.println("Authtoken " + requestheader);
+		
+//		Enumeration<String> headers = req.getHeaderNames();
+//		
+//		while(headers.hasMoreElements()) {
+//			System.out.println("Header : " + headers.nextElement());
+//		}
 		
 		String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
 

@@ -34,6 +34,77 @@ public class PassengerServlet extends HttpServlet{
 		responsebody.put("msg", "Unable to process request");
 	}
 	
+	protected void doDelete(HttpServletRequest request , HttpServletResponse response) throws IOException {
+		responsebody.clear();
+		
+		Integer userid = null;
+		Integer passengerid = null;
+		
+		try {
+			userid =Integer.parseInt( request.getParameter("userid"));
+			passengerid =Integer.parseInt( request.getParameter("passengerid"));
+		}catch(Exception e){
+			e.printStackTrace();
+			responsebody.put("success", false);
+			responsebody.put("msg", "Incomplete parameters");
+			response.getWriter().println(responsebody.toString());
+			return;
+		}
+		
+		try {
+			
+			PassengerUtil.deletePassenger(userid, passengerid);
+			responsebody.put("success", true);
+			responsebody.put("msg", "Request Processed");
+			response.getWriter().println(responsebody.toString());
+		} catch (ClassNotFoundException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", "Unable to process request");
+			response.getWriter().println(responsebody.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", "Unable to process request");
+			response.getWriter().println(responsebody.toString());
+			e.printStackTrace();
+		} catch (CustomException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", e.getLocalizedMessage());
+			response.getWriter().println(responsebody.toString());
+			e.printStackTrace();
+		}
+	}
+	
+	
+	protected void doPut(HttpServletRequest request , HttpServletResponse response) throws IOException {
+		responsebody.clear();
+		String requestdata = InputStreamReader.RequestStreamReader(request.getInputStream());
+		
+		JSONObject passengerinfo = new JSONObject(requestdata);
+		
+		PassengerPojo pp = PassengerUtil.convertjsontoobj(passengerinfo);
+		
+		try {
+			PassengerUtil.putPassenger(pp);
+			responsebody.put("success", true);
+			responsebody.put("msg", "Request Processed");
+			response.getWriter().println(responsebody.toString());
+		} catch (ClassNotFoundException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", "Unable to process request");
+			response.getWriter().println(responsebody.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", "Unable to process request");
+			e.printStackTrace();
+		} catch (CustomException e) {
+			responsebody.put("success", false);
+			responsebody.put("msg", e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	protected void doGet(HttpServletRequest request , HttpServletResponse response) throws IOException {
 		
 		System.out.println(request.getHeader("x-authorization"));

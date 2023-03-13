@@ -24,6 +24,30 @@ public class PassengerUtil {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public static void putPassenger(PassengerPojo pp) throws ClassNotFoundException, SQLException, CustomException {
+		Connection con = DBInstance.getInstance().getConnection();
+		
+		String updatepassenger = "update passenger_user_rel set passenger_name = ? , gender = ? , age = ? "
+				+ "where passenger_id = ?";
+		PreparedStatement ps = con.prepareStatement(updatepassenger);
+		
+		ps.setString(1, pp.getPassengername());
+		ps.setString(2, pp.getGender());
+		ps.setInt(3, pp.getAge());
+		ps.setInt(4, pp.getPassengerid());
+		
+		
+		con.setAutoCommit(false);
+		boolean res = ps.executeUpdate() > 0;
+		
+		if(res == false) {
+			throw new CustomException("Could not update passenger details");
+		}
+		
+		con.commit();
+		
+	}
+	
 	protected static PassengerPojo getSinglePassenger(Integer passengerid) throws ClassNotFoundException, SQLException, CustomException {
 		Connection con = DBInstance.getInstance().getConnection();
 		
@@ -50,7 +74,7 @@ public class PassengerUtil {
 	public static void deletePassenger(int userid , int passengerid) throws ClassNotFoundException, SQLException, CustomException {
 		Connection con = DBInstance.getInstance().getConnection();
 		
-		String deletepassenger = "delete from passenger_user_rel where userid = ? and passenger_id = ?";
+		String deletepassenger = "delete from passenger_user_rel where user_id = ? and passenger_id = ?";
 		
 		PreparedStatement ps = con.prepareStatement(deletepassenger);
 		ps.setInt(1, userid);
@@ -64,6 +88,7 @@ public class PassengerUtil {
 		}catch(SQLException e) {
 			try {
 				con.rollback();
+				e.printStackTrace();
 			}catch(SQLException e1) {
 				throw new CustomException("Could not rollback");
 			}
@@ -220,6 +245,18 @@ public class PassengerUtil {
 		}
 		
 		
+	}
+
+	public static PassengerPojo convertjsontoobj(JSONObject passinfo) {
+		
+		PassengerPojo pp = new PassengerPojo();
+		
+		pp.setPassengerid(passinfo.getInt("passengerid"));
+		pp.setPassengername(passinfo.getString("passengername"));
+		pp.setAge(passinfo.getInt("age"));
+		pp.setGender(passinfo.getString("gender"));
+		
+		return pp;
 	}
 	
 }

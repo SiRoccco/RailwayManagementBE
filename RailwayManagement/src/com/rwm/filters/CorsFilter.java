@@ -1,6 +1,7 @@
 package com.rwm.filters;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -29,6 +30,15 @@ public class CorsFilter implements Filter {
 		res.addHeader("Access-Control-Allow-Origin", "*");
 		res.addHeader("Access-Control-Allow-Headers", "*");
 		res.addHeader("Access-Control-Allow-Methods", "*");
+		
+		
+//		Enumeration<String> headers = req.getHeaderNames();
+//		
+//		while(headers.hasMoreElements()) {
+//			System.out.println("Header : " + headers.nextElement());
+//		}
+		
+		
 		
 		fchain.doFilter(req, res);
 	}
