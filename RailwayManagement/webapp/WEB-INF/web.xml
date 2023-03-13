@@ -170,7 +170,7 @@
   	<filter-name>AuthFilter</filter-name>
   	<servlet-name>DummyServlet</servlet-name>
   	<servlet-name>TicketServlet</servlet-name>
-  	<!-- <url-pattern>/dummy</url-pattern>
+  	<url-pattern>/dummy</url-pattern>
   	<url-pattern>/train</url-pattern>
   	<url-pattern>/station</url-pattern>
   	<url-pattern>/trip</url-pattern>
@@ -178,7 +178,7 @@
   	<url-pattern>/booking</url-pattern>
   	<url-pattern>/passenger</url-pattern>
   	<url-pattern>/cancel</url-pattern>
-  	<url-pattern>/ticket</url-pattern> --> 
+  	<url-pattern>/ticket</url-pattern> 
   	<url-pattern>/ticket</url-pattern>
   </filter-mapping>
 </web-app>
