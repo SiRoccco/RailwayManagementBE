@@ -564,6 +564,7 @@ public class RwmDao {
 			Trip trip = new Trip();
 
 			trip.setTripid(rs.getInt("Trip_ID"));
+			trip.setTripname(rs.getString("Trip_Name"));
 			trip.setTrainid(rs.getInt("Train_ID"));
 			trip.setCostperkm(rs.getInt("CostPerKm"));
 			triplist.add(this.gettripdetails(trip));
@@ -788,7 +789,7 @@ public class RwmDao {
 			trip.setCostperkm(rs.getInt("costperkm"));
 			trip.setTripid(tripid);
 			trip.setTrainid(rs.getInt("Train_ID"));
-
+			trip.setTripname(rs.getString("trip_name"));
 			return this.gettripdetails(trip);
 
 		}
