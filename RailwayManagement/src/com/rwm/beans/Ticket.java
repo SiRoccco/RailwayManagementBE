@@ -26,8 +26,22 @@ public class Ticket {
 	
 	private float fare;
 	
+	private boolean expired;
 	
 	
+	
+	public boolean isExpired() {
+		return expired;
+	}
+
+
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
+
+
 	public String getTrainname() {
 		return trainname;
 	}

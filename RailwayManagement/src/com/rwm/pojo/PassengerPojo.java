@@ -14,9 +14,16 @@ public class PassengerPojo {
 	
 	private int seatno;
 	
-	
-	
-	
+	private String ticketstatus;
+
+	public String getTicketstatus() {
+		return ticketstatus;
+	}
+
+	public void setTicketstatus(String ticketstatus) {
+		this.ticketstatus = ticketstatus;
+	}
+
 	public int getCoachno() {
 		return coachno;
 	}

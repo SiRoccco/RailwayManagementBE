@@ -100,6 +100,10 @@ public class TicketUtil {
 				LocalDateTime depttime = LocalDateTime.ofInstant(Instant.ofEpochMilli(startingstationrs.getLong("departure_time")), ZoneOffset.UTC );
 				sspj.setDeparturetime(depttime);
 				
+				if(LocalDateTime.now().isAfter(depttime)){
+					t.setExpired(true);
+				}
+				
 				t.setBoardingstation(sspj);
 			}else {
 				throw new CustomException("Error");
@@ -153,7 +157,7 @@ public class TicketUtil {
 			throw new CustomException("Error");
 		}
 		
-		String getpassids = "select coach_no , seat_no ,passenger_id from ticket_seat_rel where trip_id = ? and ticket_id = ?";
+		String getpassids = "select coach_no , seat_no ,passenger_id , present from ticket_seat_rel where trip_id = ? and ticket_id = ?";
 		PreparedStatement ps = con.prepareStatement(getpassids);
 		ps.setInt(1, t.getTripid());
 		ps.setInt(2, t.getTicketid());
@@ -168,9 +172,12 @@ public class TicketUtil {
 			PassengerPojo pp = new PassengerPojo();
 			ps1.setInt(1, rs.getInt("passenger_id"));
 			
+			
+			
 			ResultSet passinfors = ps1.executeQuery();
 			
 			if(passinfors.next()) {
+				pp.setTicketstatus((rs.getInt("present") > 0 )? "active" :"cancelled");
 				pp.setPassengerid(passinfors.getInt("passenger_id"));
 				pp.setPassengername(passinfors.getString("passenger_name"));
 				pp.setAge(passinfors.getInt("age"));
